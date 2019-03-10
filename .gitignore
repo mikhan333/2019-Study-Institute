@@ -1,0 +1,5 @@
+# python
+*.out
+*os_files
+*.idea
+*idea
