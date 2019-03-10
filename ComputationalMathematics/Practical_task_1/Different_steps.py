@@ -16,6 +16,7 @@ def im_euler(u, r, h, N):
         u[i+1] = (u[i]*(1+101*h) + r[i]*h)/const
         r[i+1] = (u[i]*(-100*h) + r[i])/const
 
+
 def build(i, h=2e-2, M=6):
     T = 10
     N = int(T/h + 1)
@@ -41,13 +42,13 @@ fig = plt.figure()
 print('Пронаблюдаем явный метод Эйлера при разных шагах h')
 
 M = 8
-
+h = 0.01
 T = 10
 N = int(T/h + 1)
 x_teor = np.linspace(0,T,(N-1)*100+1) 
 
 ax = plt.subplot(M+1,1,1)
-ex_euler(u, r, h, N)
+
 plt.plot(x_teor, 2*np.exp(-x_teor))
 ax.set_title('Точное решение 2e^(-x)')
 
