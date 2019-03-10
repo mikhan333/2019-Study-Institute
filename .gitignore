@@ -5,4 +5,11 @@
 *idea
 
 # scripts
-*.sh
+*_script.sh
+
+# libs
+*gmp-6.1.2/
+
+# secure files
+*.bash*
+*.ssh/
