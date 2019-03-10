@@ -1,0 +1,8 @@
+# python
+*.out
+*os_files
+*.idea
+*idea
+
+# scripts
+*.sh
