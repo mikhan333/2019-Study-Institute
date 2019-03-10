@@ -13,3 +13,8 @@
 # secure files
 *.bash*
 *.ssh/
+
+# ipynb
+*.ipynb_checkpoints/
+*.rar
+*__pycache__*

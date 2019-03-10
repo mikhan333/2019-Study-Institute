@@ -1,6 +1,6 @@
 #include <mpi.h>
 #include <stdio.h>
-#include "gmp-6.1.2/gmp.h"
+//#include "gmp-6.1.2/gmp.h"
 
 
 
@@ -13,9 +13,9 @@ int main(int argc, char *argv[], char *env[]) {
 
     if (argc != 2) {
         N = 30;
+    } else {
+        N = atoi(argv[1]);
     }
-    N = atoi(argv[1]);
-
     MPI_Init(&argc, &argv);
     MPI_Status stat;
     int size, rank;
