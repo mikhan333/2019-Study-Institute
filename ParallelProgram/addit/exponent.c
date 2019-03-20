@@ -3,7 +3,7 @@
 #include <string.h>
 #include <time.h>
 #include <mpi.h>
-#include "gmp-6.1.2/gmp.h"
+#include "gmp-6.1.2+dfsg/gmp.h"
 
 #define MAX_RECV_SIZE 1024
 #define DEFAULT_PREC 1024
@@ -15,7 +15,7 @@ void mpf_factorial(mpf_t rop, unsigned long int n);
 
 int main(int argc, char **argv){
     // check args
-    if(argc != 2){
+    if(argc != 2) {
         printf("Incorrect input! Need 1 argument: the limit of summation\n");
         exit(EXIT_FAILURE);
     }

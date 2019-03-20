@@ -1,8 +1,7 @@
 #include <mpi.h>
 #include <stdio.h>
-//#include "gmp-6.1.2/gmp.h"
-
-
+//#include "long_arith/LongNumber.h"
+#include <gmp.h>
 
 int main(int argc, char *argv[], char *env[]) {
     int	N;
@@ -21,7 +20,6 @@ int main(int argc, char *argv[], char *env[]) {
     int size, rank;
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-
     start_time = MPI_Wtime();
 
     diff = N / size;
@@ -52,7 +50,9 @@ int main(int argc, char *argv[], char *env[]) {
 
     if (rank == 0) {
         fac = part_fac;
-        MPI_Send(&fac, 1, MPI_INTEGER, 1, 0, MPI_COMM_WORLD);
+        if (size != 1) {
+            MPI_Send(&fac, 1, MPI_INTEGER, 1, 0, MPI_COMM_WORLD);
+        }
         add_fac = 1;
     } else {
         MPI_Recv(&add_fac, 1, MPI_INTEGER, rank - 1, 0, MPI_COMM_WORLD, &stat);

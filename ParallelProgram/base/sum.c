@@ -2,13 +2,13 @@
 #include <stdio.h>
 
 int main(int argc, char *argv[], char *env[]) {
-    int	N = 1000000000;
+    int	N;
     int	start, end;
     double start_time, end_time;
     double sum, result;
 
     if (argc != 2) {
-        N = 1000;
+        N = 10000000;
     } else {
         N = atoi(argv[1]);
     }
@@ -35,15 +35,13 @@ int main(int argc, char *argv[], char *env[]) {
     }
 
     int	i;
-    for (i = start; i <= end; i++)
-    {
+    for (i = start; i <= end; i++) {
         sum += 1.0 / i;
     }
     MPI_Reduce(&sum, &result, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
     end_time = MPI_Wtime();
-    if (rank == 0)
-    {
-        printf("Get: %f; with %d; for %f\n", result, size, end_time-start_time);
+    if (rank == 0) {
+        printf("Get: %.15f; with %d; for %f\n", result, size, end_time-start_time);
     }
 
     MPI_Finalize();
