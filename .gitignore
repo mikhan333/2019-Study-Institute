@@ -3,6 +3,7 @@
 *os_files
 *.idea
 *idea
+*dev
 
 # scripts
 *_script.sh

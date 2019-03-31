@@ -1,7 +1,6 @@
 #include <mpi.h>
 #include <stdio.h>
-//#include "long_arith/LongNumber.h"
-#include <gmp.h>
+
 
 int main(int argc, char *argv[], char *env[]) {
     int	N;
@@ -66,7 +65,7 @@ int main(int argc, char *argv[], char *env[]) {
     end_time = MPI_Wtime();
 
     if (rank == 0) {
-        printf("Get: %f; with %d; for %f\n", result + 1.0, size, end_time-start_time);
+        printf("Get: %.50f; with %d; for %f\n", result + 1.0, size, end_time-start_time);
     }
 
     MPI_Finalize();
