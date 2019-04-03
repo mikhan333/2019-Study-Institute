@@ -9,7 +9,7 @@
 #include <time.h>
 #include <pwd.h>
 #include <grp.h>
-
+// Программа для вызова команды ll в directory
 int main(int argc, char *argv[], char *envp[])
 {
     struct stat sb;
