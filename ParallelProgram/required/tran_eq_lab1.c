@@ -31,6 +31,10 @@ double transport_eq_angle(int k, int m, double u_left, double u_mid) {
     return (function_f(k - 1, m) - (u_mid - u_left) / inter_coord) * inter_time + u_mid;
 }
 
+// Можно задать начальные условия - функции на краях function_time && function_coord
+// Также можно задать функцию f - function_f
+// А также задается максимальное время и координаты, и разбивка на отрезках
+// max_time && max_coord; len_time && len_coord
 int main(int argc, char *argv[]) {
     double start_time, end_time;
     int start, end, diff, rest;

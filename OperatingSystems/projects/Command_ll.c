@@ -9,9 +9,8 @@
 #include <time.h>
 #include <pwd.h>
 #include <grp.h>
-// Программа для вызова команды ll в directory
-int main(int argc, char *argv[], char *envp[])
-{
+
+int main(int argc, char *argv[], char *envp[]) {
     struct stat sb;
     char *dir_str;
     if (argc == 2) {
@@ -20,6 +19,11 @@ int main(int argc, char *argv[], char *envp[])
         dir_str = "./";
     }
 
+    int length = strlen(dir_str);
+    if (dir_str[length - 1] != '/') {
+        dir_str[length] = '/';
+        dir_str[length + 1] = '\0';
+    }
 
     DIR *dir = opendir(dir_str);
     if (dir == NULL) {
@@ -43,10 +47,18 @@ int main(int argc, char *argv[], char *envp[])
 
         // Тип файла
         switch (sb.st_mode & S_IFMT) {
-            case S_IFBLK: printf("%9s", "block_dev"); break;
-            case S_IFCHR: printf("%9s", "char_dev"); break;
-            case S_IFDIR: printf("%9s", "directory"); break;
-            case S_IFIFO: printf("%9s", "fifo/pipe"); break;
+            case S_IFBLK:
+                printf("%9s", "block_dev");
+                break;
+            case S_IFCHR:
+                printf("%9s", "char_dev");
+                break;
+            case S_IFDIR:
+                printf("%9s", "directory");
+                break;
+            case S_IFIFO:
+                printf("%9s", "fifo/pipe");
+                break;
             case S_IFLNK:
                 printf("%9s", "symlink");
                 if (readlink(name_pass, link_buf, 512) < 0) {
@@ -54,9 +66,15 @@ int main(int argc, char *argv[], char *envp[])
                     exit(-1);
                 }
                 break;
-            case S_IFREG: printf("%9s", "reg_file"); break;
-            case S_IFSOCK: printf("%9s", "socket"); break;
-            default: printf("%9s", "unknown"); break;
+            case S_IFREG:
+                printf("%9s", "reg_file");
+                break;
+            case S_IFSOCK:
+                printf("%9s", "socket");
+                break;
+            default:
+                printf("%9s", "unknown");
+                break;
         }
         printf(" --- ");
         // Количество жестких ссылок
@@ -64,13 +82,19 @@ int main(int argc, char *argv[], char *envp[])
 
         printf(" --- ");
         // Права доступа
-        for(i = 8; i >= 0; --i) {
+        for (i = 8; i >= 0; --i) {
             rights = (sb.st_mode >> i) & 1;
             if (rights == 1) {
                 switch (i % 3) {
-                    case 2: printf("r"); break;
-                    case 1: printf("w"); break;
-                    case 0: printf("x"); break;
+                    case 2:
+                        printf("r");
+                        break;
+                    case 1:
+                        printf("w");
+                        break;
+                    case 0:
+                        printf("x");
+                        break;
                 }
             } else {
                 printf("-");
@@ -83,7 +107,7 @@ int main(int argc, char *argv[], char *envp[])
         printf("%8s", pws->pw_name);
 
         printf(" --- ");
-        // Владелец
+        // Владелец группа
         grp = getgrgid(sb.st_gid);
         printf("%8s", grp->gr_name);
 
@@ -105,7 +129,7 @@ int main(int argc, char *argv[], char *envp[])
         // Имя
         printf("%s", element->d_name);
         if (S_ISLNK(sb.st_mode)) {
-            printf("--> %s", link_buf);
+            printf(" --> %s", link_buf);
         }
 
         printf("\n");
@@ -113,7 +137,7 @@ int main(int argc, char *argv[], char *envp[])
         memset(link_buf, 0, 511);
     }
 
-    if (closedir(dir) == -1){
+    if (closedir(dir) == -1) {
         printf("error closedir\n");
         exit(-1);
     }
