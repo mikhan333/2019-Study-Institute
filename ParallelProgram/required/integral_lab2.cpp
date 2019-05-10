@@ -86,7 +86,7 @@ int main(int argc, char *argv[]) {
 
     int err;
     if (argc != 3) {
-        size = 20;
+        size = 10;
         points = 100000;
     } else {
         size = atoi(argv[1]);

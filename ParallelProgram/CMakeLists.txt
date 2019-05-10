@@ -16,6 +16,7 @@ file( GLOB LIB_HEADERS base/*.h )
 add_library( YourLib ${LIB_SOURCES} ${LIB_HEADERS} )
 #set(SOURCES base/hello_pth.cpp base/sum_pth.cpp)
 #add_executable(main ${SOURCES})
+#add_executable(main base/transfer_pth.cpp)
 add_executable(main required/integral_lab2.cpp)
 
 target_link_libraries(main ${PTHREAD_LIBRARY} ${PCRE_LIBRARY})
