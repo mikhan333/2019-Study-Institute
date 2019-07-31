@@ -3,7 +3,6 @@
 *os_files
 *.idea
 *idea
-*dev
 
 # c and c++
 *cmake-build-debug/
